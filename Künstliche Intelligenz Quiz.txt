@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KI Quiz</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    const correctAnswers = [1956, 30, 97, 93, 10]; // Richtige Antworten für die Fragen
+
+    function checkAnswers() {
+      const userAnswers = [];
+      const button = document.getElementById('submitButton');
+
+      // Add animation to the button
+      button.classList.add('animate-pulse');
+
+      // Simulate a delay for the animation
+      setTimeout(() => {
+        for (let i = 1; i <= correctAnswers.length; i++) {
+          const answer = parseFloat(document.getElementById(`answer${i}`).value);
+          userAnswers.push(answer);
+        }
+
+        userAnswers.forEach((answer, index) => {
+          const correct = correctAnswers[index];
+          const diff = Math.abs(correct - answer);
+          const resultBox = document.getElementById(`result${index + 1}`);
+
+          resultBox.innerHTML = `<p class='mt-2 text-sm'><span class='font-semibold'>Deine Antwort:</span> <span class='text-blue-500'>${answer}</span><br>
+            <span class='font-semibold'>Richtige Antwort:</span> <span class='text-green-500'>${correct}</span><br>
+            <span class='font-semibold'>Abweichung:</span> <span class='text-red-500'>${diff}</span></p>`;
+          resultBox.classList.remove("hidden");
+        });
+
+        // Remove animation after results are displayed
+        button.classList.remove('animate-pulse');
+      }, 500);
+    }
+  </script>
+  <style>
+    body {
+      background: linear-gradient(to bottom right, #3b82f6, #9333ea);
+      min-height: 100vh;
+    }
+  </style>
+</head>
+<body class="text-gray-800 font-sans">
+  <div class="max-w-3xl mx-auto p-6">
+    <h1 class="text-4xl font-bold text-center mb-8 text-white">✨ Quiz: Künstliche Intelligenz und die Arbeitswelt ✨</h1>
+    <form id="quizForm" class="space-y-8">
+      <div class="p-6 bg-white rounded-2xl shadow-lg">
+        <label for="answer1" class="block text-lg font-semibold">1. In welchem Jahr wurde der Begriff "Künstliche Intelligenz" erstmals geprägt?</label>
+        <input type="number" id="answer1" class="w-full p-3 mt-2 border rounded-lg" placeholder="Deine Schätzung...">
+        <div id="result1" class="hidden mt-4 p-3 bg-gray-100 rounded-lg"></div>
+      </div>
+
+      <div class="p-6 bg-white rounded-2xl shadow-lg">
+        <label for="answer2" class="block text-lg font-semibold">2. Bis 2030 könnten wie viel Prozent der Arbeitsplätze durch Automatisierung ersetzt werden?</label>
+        <input type="number" id="answer2" class="w-full p-3 mt-2 border rounded-lg" placeholder="Deine Schätzung in %...">
+        <div id="result2" class="hidden mt-4 p-3 bg-gray-100 rounded-lg"></div>
+      </div>
+
+      <div class="p-6 bg-white rounded-2xl shadow-lg">
+        <label for="answer3" class="block text-lg font-semibold">3. Wie viele Millionen neue Jobs könnten bis 2030 durch KI geschaffen werden?</label>
+        <input type="number" id="answer3" class="w-full p-3 mt-2 border rounded-lg" placeholder="Deine Schätzung in Millionen...">
+        <div id="result3" class="hidden mt-4 p-3 bg-gray-100 rounded-lg"></div>
+      </div>
+
+      <div class="p-6 bg-white rounded-2xl shadow-lg">
+        <label for="answer4" class="block text-lg font-semibold">4. Wie hoch war der globale Marktwert für KI 2021 in Milliarden USD?</label>
+        <input type="number" id="answer4" class="w-full p-3 mt-2 border rounded-lg" placeholder="Deine Schätzung in Milliarden...">
+        <div id="result4" class="hidden mt-4 p-3 bg-gray-100 rounded-lg"></div>
+      </div>
+
+      <div class="p-6 bg-white rounded-2xl shadow-lg">
+        <label for="answer5" class="block text-lg font-semibold">5. Wie viele Stunden pro Woche könnte KI typische Bürokräfte entlasten?</label>
+        <input type="number" id="answer5" class="w-full p-3 mt-2 border rounded-lg" placeholder="Deine Schätzung in Stunden...">
+        <div id="result5" class="hidden mt-4 p-3 bg-gray-100 rounded-lg"></div>
+      </div>
+
+      <button id="submitButton" type="button" onclick="checkAnswers()" class="w-full bg-gradient-to-r from-blue-500 to-purple-600 text-white py-3 px-6 rounded-2xl text-lg font-bold shadow-md hover:shadow-lg transition">Antworten überprüfen</button>
+    </form>
+  </div>
+</body>
+</html>
